@@ -8,10 +8,9 @@ export default class DealersModel {
   @action.bound
   async fetchDealers(id) {
     try {
-      if (this.dealers.includes(id) === false) {
-        this.dealers.push(id);
+      if (this.dealers[id] === undefined) {
         let { data } = await api.getDealer(id);
-        this.dealers[`${id}`] = data;
+        this.dealers[id] = data;
       }
     } catch (err) {
       throw err;
