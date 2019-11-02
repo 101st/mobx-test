@@ -4,15 +4,17 @@ import 'antd/dist/antd.css';
 
 import CarsList from './components/Cars';
 import CarsModel from './models/CarsModel';
+import DealersModel from './models/DealersModel';
 
-const store = new CarsModel();
+const carsStore = new CarsModel();
+const dealersStroe = new DealersModel();
 
 render(
   <div>
-    <CarsList store={store} />
+    <CarsList
+      carsStore={carsStore}
+      dealersStroe={dealersStroe}
+    />
   </div>,
   document.getElementById('root')
 );
-
-// playing around in the console
-window.store = store;
