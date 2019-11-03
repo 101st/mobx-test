@@ -8,7 +8,9 @@ import Dealer from '../components/Dealer';
 @observer
 class Cars extends React.Component {
   render() {
-    let { cars, carsTotalCount, page, per_page, loading: carsLoader, fetchCars } = this.props.carsStore;
+    let { history } = this.props;
+    let { page } = this.props.match.params;
+    let { cars, carsTotalCount, per_page, loading: carsLoader, fetchCars } = this.props.carsStore;
     let { dealersCount, loading: dealersLoader } = this.props.dealersStore;
     return (
       <div>
@@ -28,9 +30,12 @@ class Cars extends React.Component {
 
         <Pagination
           simple
-          onChange={fetchCars}
+          onChange={(page) => { //TODO
+            history.push(`/page/${page}`);
+            fetchCars(page, per_page)
+          }}
           pageSize={per_page}
-          defaultCurrent={page}
+          defaultCurrent={Number(page)}
           total={carsTotalCount}
           style={{ marginTop: '10px' }} />
       </div>

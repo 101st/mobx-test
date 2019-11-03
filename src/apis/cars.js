@@ -15,7 +15,7 @@ export const getCars = async (page = 1, per_page = 10) => {
 
 export const getDealer = async (id) => {
   try {
-    await utils.sleep(utils.getRandomInt(500, 1000)); //TODO
+    await utils.sleep(utils.getRandomInt(500, 1500)); //TODO
     return GET(`dealers/${id}`);
   } catch (error) {
     throw error;
