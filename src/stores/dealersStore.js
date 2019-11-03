@@ -19,6 +19,7 @@ export default class {
         this.loadingQueueCount++;
         this.loading = true;
         let { data } = await api.getDealer(id);
+        data.id = id; //TODO API bugs
         this.dealers.push(data);
         this.loadingQueueCount--;
         if (this.loadingQueueCount === 0) this.loading = false;
