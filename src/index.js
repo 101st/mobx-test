@@ -4,24 +4,16 @@ import { Provider } from 'mobx-react';
 import 'antd/dist/antd.css';
 
 import CarsList from './components/Cars';
-import CarsModel from './models/CarsModel';
-import DealersModel from './models/DealersModel';
+import store from './stores';
 
-// Root Store Declaration
-class RootStore {
-  constructor() {
-    this.carsStore = new CarsModel(this);
-    this.dealersStore = new DealersModel(this);
-  }
-}
-const rootStore = new RootStore();
+const stores = {
+  store,
+  carsStore: store.carsStore,
+  dealersStore: store.dealersStore
+};
 
 render(
-  <Provider
-    rootStore={rootStore}
-    carsStore={rootStore.carsStore}
-    dealersStore={rootStore.dealersStore}
-  >
+  <Provider {...stores}>
     <CarsList />
   </Provider>,
   document.getElementById('root')

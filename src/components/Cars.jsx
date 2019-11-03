@@ -9,11 +9,12 @@ import Dealer from '../components/Dealer';
 class Cars extends React.Component {
   render() {
     let { cars, carsTotalCount, page, per_page, loading: carsLoader, fetchCars } = this.props.carsStore;
+    let { dealersCount, loading: dealersLoader } = this.props.dealersStore;
     return (
       <div>
-        <h4>Cars List ({carsTotalCount})</h4>
+        <h4>Cars: {carsTotalCount}, Dealers: {dealersCount}</h4>
         <Table
-          loading={carsLoader}
+          loading={carsLoader && dealersLoader}
           pagination={false}
           bordered={true}
           dataSource={cars}
