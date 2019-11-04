@@ -9,11 +9,6 @@ export default class {
   @observable loading = true;
 
   @computed
-  get carsCount() {
-    return this.cars.length;
-  }
-
-  @computed
   get carsTotalCount() {
     return Number(this.headers['x-total-count']) || 0;
   }

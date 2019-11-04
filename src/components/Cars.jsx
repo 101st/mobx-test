@@ -29,7 +29,7 @@ class Cars extends React.Component {
 
         <Pagination
           simple
-          onChange={(page) => { //TODO
+          onChange={(page) => {
             history.push(`/page/${page}`);
             setPage(page);
           }}
