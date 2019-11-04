@@ -1,8 +1,9 @@
 import React from 'react';
-import { action } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { Table, Pagination } from 'antd';
 import Dealer from '../components/Dealer';
+
+import './style.css';
 
 @inject('carsStore', 'dealersStore')
 @observer
@@ -10,15 +11,13 @@ class Cars extends React.Component {
   render() {
     let { history } = this.props;
     let { page } = this.props.match.params;
-    let { cars, carsTotalCount, per_page, loading: carsLoader, fetchCars } = this.props.carsStore;
-    let { dealersCount, loading: dealersLoader } = this.props.dealersStore;
+    let { cars, carsTotalCount, per_page, loading: carsLoader, setPage } = this.props.carsStore;
+    let { loading: dealersLoader } = this.props.dealersStore;
     return (
-      <div>
-        <h4>Cars: {carsTotalCount}, Dealers: {dealersCount}</h4>
+      <div className='cars-table'>
         <Table
           loading={carsLoader && dealersLoader}
           pagination={false}
-          bordered={true}
           dataSource={cars}
           size="small">
           <Table.Column title="Brand" dataIndex="brand" key="brand" />
@@ -32,7 +31,7 @@ class Cars extends React.Component {
           simple
           onChange={(page) => { //TODO
             history.push(`/page/${page}`);
-            fetchCars(page, per_page)
+            setPage(page);
           }}
           pageSize={per_page}
           defaultCurrent={Number(page)}
@@ -40,12 +39,6 @@ class Cars extends React.Component {
           style={{ marginTop: '10px' }} />
       </div>
     );
-  }
-
-  @action
-  componentDidMount() {
-    let { page, per_page, fetchCars } = this.props.carsStore;
-    fetchCars(page, per_page);
   }
 }
 

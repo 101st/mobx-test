@@ -18,15 +18,10 @@ export default class {
     return Number(this.headers['x-total-count']) || 0;
   }
 
-  @action.bound
-  async fetchCars(page = 1, per_page = 15) {
-    try {
-      this.loading = true;
-      let { data, headers } = await api.getCars(page, per_page);
-      this.headers = headers;
-      this.cars = data.map(car => { car.key = car.id; return car; });
-    } catch (err) {
-      throw err;
-    }
-  }
+  reactToChangePage = autorun(async () => {
+    this.loading = true;
+    let { data, headers } = await api.getCars(this.page, this.per_page);
+    this.headers = headers;
+    this.cars = data.map(car => { car.key = car.id; return car; });
+  });
 }
