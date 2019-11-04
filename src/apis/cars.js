@@ -1,5 +1,4 @@
 import axios from 'axios';
-import * as utils from '../utils';
 
 const headers = { 'X-CS-Dealer-Id-Only': 1, 'Content-Type': 'application/json' };
 const getURL = path => `https://jlrc.dev.perx.ru/carstock/api/v1/${path}`;
