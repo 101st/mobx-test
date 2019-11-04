@@ -1,4 +1,3 @@
-//import { observable, computed, autorun, reaction, get, action } from 'mobx';
 import carsStore from './carsStore';
 import dealersStore from './dealersStore';
 
