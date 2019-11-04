@@ -1,4 +1,4 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, autorun } from 'mobx';
 import * as api from '../apis/cars';
 
 export default class {
@@ -13,8 +13,13 @@ export default class {
     return Number(this.headers['x-total-count']) || 0;
   }
 
-  reactToChangePage = autorun(async () => {
+  @action.bound
+  setPage(page) {
     this.loading = true;
+    this.page = page;
+  }
+
+  reactToChangePage = autorun(async () => {
     let { data, headers } = await api.getCars(this.page, this.per_page);
     this.headers = headers;
     this.cars = data.map(car => { car.key = car.id; return car; });
