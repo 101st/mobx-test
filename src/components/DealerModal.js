@@ -1,5 +1,5 @@
 import React from 'react';
-import { action, toJS } from 'mobx';
+import { toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
 import { Link } from 'react-router-dom';
 import { Modal, Button, Skeleton, Descriptions, Icon } from 'antd';
@@ -42,7 +42,7 @@ class DealerModal extends React.Component {
         >
           <Descriptions title="User Info" bordered column={1}>
             {dealer[0].offices.map((office, key) => {
-              return <Descriptions.Item label={`Office #${key + 1}`}>
+              return <Descriptions.Item key={key} label={`Office #${key + 1}`}>
                 <p><Icon type="environment" /> {office.address}</p>
                 <p><Icon type="phone" /> {office.phone}</p>
                 <p><Icon type="global" /> <Link to={office.url} target='__blank'>{office.url}</Link></p>
