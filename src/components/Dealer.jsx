@@ -1,6 +1,8 @@
 import React from 'react';
 import { action, toJS } from 'mobx';
 import { observer, inject } from 'mobx-react';
+import { Link } from 'react-router-dom';
+import history from '../history';
 import { Icon } from 'antd';
 
 @inject('dealersStore')
@@ -9,9 +11,9 @@ class Dealer extends React.Component {
   render() {
     let { dealers } = this.props.dealersStore;
     let { dealer } = this.props;
-    dealer = dealers.find(d => d.id === dealer);
+    dealer = toJS(dealers.find(d => d.id === dealer));
     if (dealer)
-      return toJS(dealer).name;
+      return <Link to={`${history.location.pathname}/dealer/${dealer.id}`}>{dealer.name}</Link>;
     else
       return <Icon type="loading" />;
   }

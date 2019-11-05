@@ -3,6 +3,7 @@ import * as api from '../apis/cars';
 
 export default class {
   @observable dealers = [];
+  @observable dealer = {};
   @observable loading = true;
   loadingQueueCount = 0;
 
@@ -12,9 +13,19 @@ export default class {
   }
 
   @action.bound
+  async setDealer(id) {
+    try {
+      await this.fetchDealers(id);
+      this.dealer = this.dealers.filter(dealer => { return dealer.id === id });
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  @action.bound
   async fetchDealers(id) {
     try {
-      let check = this.dealers.filter(dealer => { return dealer.id === id })
+      let check = this.dealers.filter(dealer => { return dealer.id === id });
       if (check.length === 0) {
         this.loadingQueueCount++;
         this.loading = true;
