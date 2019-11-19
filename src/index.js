@@ -15,6 +15,8 @@ const stores = {
   dealersStore: store.dealersStore
 };
 
+/* init */
+
 render(
   <Provider {...stores}>
     <Router history={history}>
